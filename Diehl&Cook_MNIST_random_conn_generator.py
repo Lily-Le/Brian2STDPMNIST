@@ -15,7 +15,7 @@ def randomDelay(minDelay, maxDelay):
         
 def computePopVector(popArray):
     size = len(popArray)
-    complex_unit_roots = np.array([np.exp(1j*(2*np.pi/size)*cur_pos) for cur_pos in xrange(size)])
+    complex_unit_roots = np.array([np.exp(1j*(2*np.pi/size)*cur_pos) for cur_pos in range(size)])
     cur_pos = (np.angle(np.sum(popArray * complex_unit_roots)) % (2*np.pi)) / (2*np.pi)
     return cur_pos
 
@@ -64,7 +64,7 @@ def create_weights():
         if pConn['ee_input'] < 1.0:
             weightMatrix, weightList = sparsenMatrix(weightMatrix, pConn['ee_input'])
         else:
-            weightList = [(i, j, weightMatrix[i,j]) for j in xrange(nE) for i in xrange(nInput)]
+            weightList = [(i, j, weightMatrix[i,j]) for j in range(nE) for i in range(nInput)]
         np.save(dataPath+name, weightList)
     
     
@@ -84,7 +84,7 @@ def create_weights():
     connNameList = ['AeAi']
     for name in connNameList:
         if nE == nI:
-            weightList = [(i, i, weight['ei']) for i in xrange(nE)]
+            weightList = [(i, i, weight['ei']) for i in range(nE)]
         else:
             weightMatrix = np.random.random((nE, nI))
             weightMatrix *= weight['ei']
@@ -100,9 +100,9 @@ def create_weights():
         if nE == nI:
             weightMatrix = np.ones((nI, nE))
             weightMatrix *= weight['ie']
-            for i in xrange(nI):
+            for i in range(nI):
                 weightMatrix[i,i] = 0
-            weightList = [(i, j, weightMatrix[i,j]) for i in xrange(nI) for j in xrange(nE)]
+            weightList = [(i, j, weightMatrix[i,j]) for i in range(nI) for j in range(nE)]
         else:
             weightMatrix = np.random.random((nI, nE))
             weightMatrix *= weight['ie']
